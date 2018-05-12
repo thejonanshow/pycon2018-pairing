@@ -46,13 +46,7 @@ def test_there_can_only_be_corners(test_grid):
         (0, 0), (0, 9),
         (9, 0), (9, 9),
     }
-    for coordinates in conway.a_whole_new_world(test_grid):
-        if test_grid[coordinates]:
-            output_world(conway.a_whole_new_world)
+    new_grid = conway.a_whole_new_world(test_grid)
+    for coordinates in new_grid:
+        if new_grid[coordinates]:
             assert coordinates in expected
-
-
-def output_world(grid):
-    for x in  range(10):
-        for y in range(10):
-            print('\n', x, ' ,', y, ': ', grid[(x, y)])
