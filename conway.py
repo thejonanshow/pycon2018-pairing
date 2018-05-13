@@ -3,5 +3,11 @@
 # Dead with == 3 : live
 # Live with > 3 : die
 
-def main():
-    pass
+
+class Molecule():
+    def __init__(self, neighbours = []):
+        self._neighbours = neighbours
+
+    @property
+    def neighbours(self):
+        return self._neighbours
