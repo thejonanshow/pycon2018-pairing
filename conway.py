@@ -1,8 +1,13 @@
 from random import random
 import time
+import os
 
-SIZE = 80
-LIFE_ABUNDANCE = 0.4
+
+height, width = os.popen('stty size', 'r').read().split()
+HEIGHT = int(height)
+WIDTH = int(width)
+
+LIFE_ABUNDANCE = 0.3
 
 def get_neighbors(coordinates):
     x, y = coordinates
@@ -52,21 +57,20 @@ def a_whole_new_world(grid):
     }
 
 def print_grid(grid):
-    for x in range(SIZE):
-        print(''.join('#' if grid[(x, y)] else ' ' for y in range(SIZE)))
-    print()
-    print('-' * SIZE)
+    for y in range(HEIGHT):
+        print(''.join('🐍' if grid[(x, y)] else "ㅤ" for x in range(WIDTH)))
     print()
 
 def generate_grid():
     return {
         (x, y): random() < LIFE_ABUNDANCE
-        for x in range(SIZE)
-        for y in range(SIZE)
+        for x in range(WIDTH)
+        for y in range(HEIGHT)
     }
 
 grid = generate_grid()
 while True:
+    os.system('clear')
     print_grid(grid)
     grid = a_whole_new_world(grid)
-    time.sleep(.1)
+    time.sleep(.2)
