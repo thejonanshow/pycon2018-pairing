@@ -1,5 +1,6 @@
 from random import randint
 from time import sleep
+from time import localtime
 
 colossus = open("colossus.txt", "r")
 lines = colossus.readlines()
@@ -35,17 +36,13 @@ poem = root.title()
 poeming = True
 
 while(poeming):
-    if len(poem.split()) > 200:
+    if len(poem.split()) > 400:
         poeming = False
-
-    sleep(0.5)
-    print(poem)
 
     if poetree[root]:
         next_root = poetree[root][randint(1, len(poetree[root])) - 1]
-
-        while not poetree[next_root]:
-            next_root = poetree[root][randint(1, len(poetree[root])) - 1]
+    else:
+        next_root = poetree.keys()[randint(1, len(poetree.keys())) -1]
 
     if(next_root.isdigit()):
         poeming = False
@@ -54,3 +51,8 @@ while(poeming):
         root = next_root
 
 print(poem)
+
+#outfile = open("poem"+str(localtime().tm_year)+"-"+str(localtime().tm_mon)+"-"+str(localtime().tm_mday)+'-'+
+#               str(localtime().tm_hour)+'-'+str(localtime().tm_min)+"-"+str(localtime().tm_sec)+".txt", "w+")
+#outfile.writelines(poem)
+#outfile.close()
